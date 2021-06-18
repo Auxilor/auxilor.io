@@ -1,12 +1,18 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import req from "petitio"
+import React from 'react'
+import Link from "next/link"
+import { Button, Jumbotron } from 'react-bootstrap'
 
 const page = ({ json }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   console.log(json)
   return(
-    <div>
-      <p>jason</p>
-    </div>
+    <Jumbotron>
+      <h1>Hello, there!</h1>
+      <p>
+        This page hasnt quite been developed quite yet, please come back later!
+      </p>
+    </Jumbotron>
   )
 }
 
@@ -19,9 +25,9 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
     .send()
   
   if(request.statusCode !== 200) {
-    return {
-      notFound: true
-    }
+    // return {
+    //   notFound: true
+    // }
   }
 
   const data = request.json<Props>()
