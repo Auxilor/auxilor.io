@@ -26,6 +26,16 @@ const TopBar = () => {
     setShowPlugins(false);
   };
 
+  const [showWikis, setShowWikis] = useState(false);
+
+  const showWikiDropdown = () => {
+    setShowWikis(!showEditors);
+  };
+
+  const hideWikiDropdown = () => {
+    setShowWikis(false);
+  };
+
   const router = useRouter();
 
   let BrandImage;
@@ -79,7 +89,7 @@ const TopBar = () => {
         <Nav className="mr-auto">
           <NavDropdown
             title="Plugins"
-            id="Plugins-dropdown"
+            id="plugins-dropdown"
             onMouseEnter={showPluginDropdown}
             onMouseLeave={hidePluginDropdown}
             show={showPlugins}
@@ -140,11 +150,11 @@ const TopBar = () => {
             </NavDropdown.Item>
           </NavDropdown>
           <NavDropdown
-            title="Plugins"
-            id="Plugins-dropdown"
-            onMouseEnter={showPluginDropdown}
-            onMouseLeave={hidePluginDropdown}
-            show={showPlugins}
+            title="Wiki"
+            id="wikis-dropdown"
+            onMouseEnter={showWikiDropdown}
+            onMouseLeave={hideWikiDropdown}
+            show={showWikis}
             className={style.marginRight}
           >
             <NavDropdown.Item
@@ -175,7 +185,7 @@ const TopBar = () => {
           </NavDropdown>
           <NavDropdown
             title="Editors"
-            id="Editor-Dropdown"
+            id="editors-Dropdown"
             onMouseEnter={showEditorDropdown}
             onMouseLeave={hideEditorDropdown}
             show={showEditors}
