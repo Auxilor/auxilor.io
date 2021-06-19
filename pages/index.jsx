@@ -2,7 +2,8 @@ import React from 'react';
 
 export default function Home() {
   return (
-    <div id="container">
+    <div id="content">
+
     </div>
   );
 }

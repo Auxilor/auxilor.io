@@ -140,6 +140,40 @@ const TopBar = () => {
             </NavDropdown.Item>
           </NavDropdown>
           <NavDropdown
+            title="Plugins"
+            id="Plugins-dropdown"
+            onMouseEnter={showPluginDropdown}
+            onMouseLeave={hidePluginDropdown}
+            show={showPlugins}
+            className={style.marginRight}
+          >
+            <NavDropdown.Item
+              href="https://ecoenchants.willfp.com/"
+            >
+              EcoEnchants
+            </NavDropdown.Item>
+            <NavDropdown.Item
+              href="https://ecoarmor.willfp.com/"
+            >
+              EcoArmor
+            </NavDropdown.Item>
+            <NavDropdown.Item
+              href="https://ecobosses.willfp.com/"
+            >
+              EcoBosses
+            </NavDropdown.Item>
+            <NavDropdown.Item
+              href="https://talismans.willfp.com/"
+            >
+              Talismans
+            </NavDropdown.Item>
+            <NavDropdown.Item
+              href="https://stattrackers.willfp.com/"
+            >
+              StatTrackers
+            </NavDropdown.Item>
+          </NavDropdown>
+          <NavDropdown
             title="Editors"
             id="Editor-Dropdown"
             onMouseEnter={showEditorDropdown}
