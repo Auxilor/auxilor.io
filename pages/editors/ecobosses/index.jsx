@@ -3,7 +3,6 @@ import { Jumbotron } from 'react-bootstrap';
 import req from 'petitio';
 
 const page = ({ data }) => {
-  console.log(data);
   return(
     <Jumbotron>
       <h1>Hello, there!</h1>
