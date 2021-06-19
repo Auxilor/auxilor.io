@@ -159,7 +159,7 @@ const TopBar = () => {
               aria-label="Item > Link"
               >
               <Link
-                href="/editors/EcoArmor"
+                href="/editors/ecoarmor"
               >
               EcoArmor
               </Link>
@@ -169,7 +169,7 @@ const TopBar = () => {
               aria-label="Item > Link"
             >
               <Link
-                href="/editors/EcoBosses"
+                href="/editors/ecobosses"
               >
               EcoBosses
               </Link>
