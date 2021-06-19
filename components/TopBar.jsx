@@ -31,7 +31,7 @@ const TopBar = () => {
   let BrandImage;
 
   switch (router.pathname.toLowerCase()) {
-  case '/editors/ecoarmor':
+  case '/editor/ecoarmor':
     BrandImage = (
       <Image
         src="/assets/EcoArmor@x128.png"
@@ -42,7 +42,7 @@ const TopBar = () => {
         id="navbar-logo"
       />);
     break;
-  case '/editors/ecobosses':
+  case '/editor/ecobosses':
     BrandImage = (
       <Image
         src="/assets/EcoBosses@x128.png"
@@ -152,7 +152,7 @@ const TopBar = () => {
               aria-label="Item > Link"
             >
               <Link
-                href="/editors/ecoarmor"
+                href="/editor/ecoarmor"
               >
                 EcoArmor
               </Link>
@@ -162,7 +162,7 @@ const TopBar = () => {
               aria-label="Item > Link"
             >
               <Link
-                href="/editors/ecobosses"
+                href="/editor/ecobosses"
               >
                 EcoBosses
               </Link>
