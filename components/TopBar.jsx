@@ -1,35 +1,38 @@
 import { useState } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import style from "../styles/TopBar/style.module.css"
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import style from '../styles/TopBar/style.module.css';
 
 const TopBar = () => {
-
   const [showEditors, setShowEditors] = useState(false);
-	const showEditorDropdown = (e)=>{
-		setShowEditors(!showEditors);
-	}
-	const hideEditorDropdown = (e) => {
-		setShowEditors(false);
-	}
 
-	const [showPlugins, setShowPlugins] = useState(false);
-	const showPluginDropdown = (e) => {
-		setShowPlugins(!showEditors);
-	}
-	const hidePluginDropdown = (e) => {
-		setShowPlugins(false);
-	}
-  const router = useRouter()
+  const showEditorDropdown = () => {
+    setShowEditors(!showEditors);
+  };
 
-  console.log(router.pathname.toLowerCase())
+  const hideEditorDropdown = () => {
+    setShowEditors(false);
+  };
+
+  const [showPlugins, setShowPlugins] = useState(false);
+
+  const showPluginDropdown = () => {
+    setShowPlugins(!showEditors);
+  };
+
+  const hidePluginDropdown = () => {
+    setShowPlugins(false);
+  };
+
+  const router = useRouter();
+
   let BrandImage;
 
   switch (router.pathname.toLowerCase()) {
-    case "/editors/ecoarmor":
-      BrandImage = (
+  case '/editors/ecoarmor':
+    BrandImage = (
       <Image
         src="/assets/EcoArmor@x128.png"
         width="32"
@@ -37,30 +40,30 @@ const TopBar = () => {
         className="d-inline-block align-top"
         alt="EcoArmor"
         id="navbar-logo"
-      />)
-      break;
-    case "/editors/ecobosses":
-      BrandImage = (
-        <Image
-          src="/assets/EcoBosses@x128.png"
-          width="32"
-          height="32"
-          className="d-inline-block align-top"
-          alt="EcoBosses"
-          id="navbar-logo"
-        />)
-        break;
-    default:
-      BrandImage = (
-        <Image
-          src="/assets/Auxilor@x256.jpeg"
-          width="32"
-          height="32"
-          className="d-inline-block align-top"
-          alt="Auxilor logo"
-          id="navbar-logo"
-        />)
-      break;
+      />);
+    break;
+  case '/editors/ecobosses':
+    BrandImage = (
+      <Image
+        src="/assets/EcoBosses@x128.png"
+        width="32"
+        height="32"
+        className="d-inline-block align-top"
+        alt="EcoBosses"
+        id="navbar-logo"
+      />);
+    break;
+  default:
+    BrandImage = (
+      <Image
+        src="/assets/Auxilor@x256.jpeg"
+        width="32"
+        height="32"
+        className="d-inline-block align-top"
+        alt="Auxilor logo"
+        id="navbar-logo"
+      />);
+    break;
   }
 
   return (
@@ -71,7 +74,7 @@ const TopBar = () => {
         }
       </Navbar.Brand>
       <Navbar.Brand href="/">Auxilor</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Toggle aria-controls="basic-navbar-nav"/>
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <NavDropdown
@@ -113,7 +116,7 @@ const TopBar = () => {
             >
               StatTrackers
             </NavDropdown.Item>
-            <NavDropdown.Divider />
+            <NavDropdown.Divider/>
             <NavDropdown.Header>Polymart</NavDropdown.Header>
             <NavDropdown.Item
               href="https://polymart.org/resource/490/"
@@ -157,11 +160,11 @@ const TopBar = () => {
             <NavDropdown.Item
               as="li"
               aria-label="Item > Link"
-              >
+            >
               <Link
                 href="/editors/ecoarmor"
               >
-              EcoArmor
+                EcoArmor
               </Link>
             </NavDropdown.Item>
             <NavDropdown.Item
@@ -171,7 +174,7 @@ const TopBar = () => {
               <Link
                 href="/editors/ecobosses"
               >
-              EcoBosses
+                EcoBosses
               </Link>
             </NavDropdown.Item>
 
@@ -180,6 +183,6 @@ const TopBar = () => {
       </Navbar.Collapse>
     </Navbar>
   );
-}
+};
 
 export default TopBar;
