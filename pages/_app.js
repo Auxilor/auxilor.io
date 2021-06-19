@@ -22,7 +22,7 @@ export default function App({
       </Head>
       <TopBar/>
       <main className="beans">
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </main>
     </>
   );
