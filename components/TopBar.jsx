@@ -88,31 +88,26 @@ const TopBar = () => {
             <NavDropdown.Header>Spigot</NavDropdown.Header>
             <NavDropdown.Item
               href="https://www.spigotmc.org/resources/79573/"
-              target="_blank"
             >
               EcoEnchants
             </NavDropdown.Item>
             <NavDropdown.Item
               href="https://www.spigotmc.org/resources/88246/"
-              target="_blank"
             >
               EcoArmor
             </NavDropdown.Item>
             <NavDropdown.Item
               href="https://www.spigotmc.org/resources/86576/"
-              target="_blank"
             >
               EcoBosses
             </NavDropdown.Item>
             <NavDropdown.Item
               href="https://www.spigotmc.org/resources/87377/"
-              target="_blank"
             >
               Talismans
             </NavDropdown.Item>
             <NavDropdown.Item
               href="https://www.spigotmc.org/resources/88247/"
-              target="_blank"
             >
               StatTrackers
             </NavDropdown.Item>
@@ -120,31 +115,26 @@ const TopBar = () => {
             <NavDropdown.Header>Polymart</NavDropdown.Header>
             <NavDropdown.Item
               href="https://polymart.org/resource/490/"
-              target="_blank"
             >
               EcoEnchants
             </NavDropdown.Item>
             <NavDropdown.Item
               href="https://polymart.org/resource/687/"
-              target="_blank"
             >
               EcoArmor
             </NavDropdown.Item>
             <NavDropdown.Item
               href="https://polymart.org/resource/525/"
-              target="_blank"
             >
               EcoBosses
             </NavDropdown.Item>
             <NavDropdown.Item
               href="https://polymart.org/resource/611/"
-              target="_blank"
             >
               Talismans
             </NavDropdown.Item>
             <NavDropdown.Item
               href="https://polymart.org/resource/623/"
-              target="_blank"
             >
               StatTrackers
             </NavDropdown.Item>
