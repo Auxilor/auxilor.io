@@ -1,39 +1,44 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
-import req from 'petitio';
+import axios from 'axios';
 
 const page = ({ data }) => {
-  return(
-    <Jumbotron>
-      <h1>Hello, there!</h1>
-      <p>
-        This page hasnt quite been developed quite yet, please come back later!
-      </p>
-    </Jumbotron>
+  return (
+    <div id="editor">
+      <Jumbotron>
+        <h1>Hello, there!</h1>
+        <p>
+          This page hasnt quite been developed quite yet, please come back later!
+        </p>
+      </Jumbotron>
+      <p>{JSON.stringify(data)}</p>
+    </div>
   );
 };
 
-export async function getServerSideProps({query}) {
+export async function getServerSideProps({ query }) {
   let token;
-  if(query.token !== undefined) {
+  if (query.token !== undefined) {
     token = query.token;
   }
-  const request = await req(`https://hastebin.com/raw/${token}`)
-    .send();
 
-  if(request.statusCode !== 200) {
-    // return {
-    //   notFound: true
-    // }
-  }
+  let response;
 
-  const data = request.json();
+  await axios.get(`https://hastebin.com/raw/${token}`)
+    .then((res) => {
+      response = {
+        data: res.data,
+      };
+    })
+    .catch((err) => {
+      response = {
+        data: err.message,
+      };
+    });
 
-  console.log(data);
-
-  return{
+  return {
     props: {
-      data,
+      data: response.data,
     }
   };
 }
