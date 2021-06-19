@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Badge } from 'react-bootstrap';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import style from '../styles/TopBar/style.module.css';
+import style from '../styles/TopBar/style.module.scss';
 
 const TopBar = () => {
   const [showEditors, setShowEditors] = useState(false);
@@ -77,7 +77,11 @@ const TopBar = () => {
   }
 
   return (
-    <Navbar bg="light">
+    <Navbar bg="light"
+      collapseOnSelect={true}
+      sticky="top"
+      className="shadow-sm p-3 mb-5 bg-white rounded"
+    >
       <Navbar.Brand href="/">
         {
           BrandImage
@@ -211,7 +215,6 @@ const TopBar = () => {
                 EcoBosses
               </Link>
             </NavDropdown.Item>
-
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>
