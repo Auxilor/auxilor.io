@@ -1,8 +1,7 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import req from "petitio"
 import React from 'react'
-import Link from "next/link"
-import { Button, Jumbotron } from 'react-bootstrap'
+import { Jumbotron } from 'react-bootstrap'
 
 const page = ({ json }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   console.log(json)
@@ -23,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
   }
   const request = await req(`https://hastebin.com/raw/${token}`)
     .send()
-  
+
   if(request.statusCode !== 200) {
     // return {
     //   notFound: true

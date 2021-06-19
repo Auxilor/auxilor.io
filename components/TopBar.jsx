@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import style from "../styles/TopBar/style.module.css"
 
 const TopBar = () => {
-  
+
   const [showEditors, setShowEditors] = useState(false);
 	const showEditorDropdown = (e)=>{
 		setShowEditors(!showEditors);
@@ -23,7 +23,7 @@ const TopBar = () => {
 		setShowPlugins(false);
 	}
   const router = useRouter()
-  
+
   console.log(router.pathname.toLowerCase())
   let BrandImage;
 
@@ -155,7 +155,6 @@ const TopBar = () => {
             className={style.marginRight}
           >
             <NavDropdown.Item
-              // href="/editors/EcoArmor"
               as="li"
               aria-label="Item > Link"
               >
@@ -166,7 +165,6 @@ const TopBar = () => {
               </Link>
             </NavDropdown.Item>
             <NavDropdown.Item
-              // href="/editors/EcoBosses"
               as="li"
               aria-label="Item > Link"
             >
@@ -184,4 +182,4 @@ const TopBar = () => {
   );
 }
 
-export default TopBar
+export default TopBar;
