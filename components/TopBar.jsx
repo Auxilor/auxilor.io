@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Badge } from 'react-bootstrap';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import style from '../styles/TopBar/style.module.css';
+import style from '../styles/TopBar/style.module.scss';
 
 const TopBar = () => {
   const [showEditors, setShowEditors] = useState(false);
@@ -24,6 +24,16 @@ const TopBar = () => {
 
   const hidePluginDropdown = () => {
     setShowPlugins(false);
+  };
+
+  const [showWikis, setShowWikis] = useState(false);
+
+  const showWikiDropdown = () => {
+    setShowWikis(!showEditors);
+  };
+
+  const hideWikiDropdown = () => {
+    setShowWikis(false);
   };
 
   const router = useRouter();
@@ -67,7 +77,11 @@ const TopBar = () => {
   }
 
   return (
-    <Navbar bg="light">
+    <Navbar bg="light"
+      collapseOnSelect={true}
+      sticky="top"
+      className="shadow-sm p-3 mb-5 bg-white rounded"
+    >
       <Navbar.Brand href="/">
         {
           BrandImage
@@ -79,7 +93,7 @@ const TopBar = () => {
         <Nav className="mr-auto">
           <NavDropdown
             title="Plugins"
-            id="Plugins-dropdown"
+            id="plugins-dropdown"
             onMouseEnter={showPluginDropdown}
             onMouseLeave={hidePluginDropdown}
             show={showPlugins}
@@ -140,8 +154,42 @@ const TopBar = () => {
             </NavDropdown.Item>
           </NavDropdown>
           <NavDropdown
+            title="Wiki"
+            id="wikis-dropdown"
+            onMouseEnter={showWikiDropdown}
+            onMouseLeave={hideWikiDropdown}
+            show={showWikis}
+            className={style.marginRight}
+          >
+            <NavDropdown.Item
+              href="https://ecoenchants.willfp.com/"
+            >
+              EcoEnchants
+            </NavDropdown.Item>
+            <NavDropdown.Item
+              href="https://ecoarmor.willfp.com/"
+            >
+              EcoArmor
+            </NavDropdown.Item>
+            <NavDropdown.Item
+              href="https://ecobosses.willfp.com/"
+            >
+              EcoBosses
+            </NavDropdown.Item>
+            <NavDropdown.Item
+              href="https://talismans.willfp.com/"
+            >
+              Talismans
+            </NavDropdown.Item>
+            <NavDropdown.Item
+              href="https://stattrackers.willfp.com/"
+            >
+              StatTrackers
+            </NavDropdown.Item>
+          </NavDropdown>
+          <NavDropdown
             title="Editors"
-            id="Editor-Dropdown"
+            id="editors-Dropdown"
             onMouseEnter={showEditorDropdown}
             onMouseLeave={hideEditorDropdown}
             show={showEditors}
@@ -167,7 +215,6 @@ const TopBar = () => {
                 EcoBosses
               </Link>
             </NavDropdown.Item>
-
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>
