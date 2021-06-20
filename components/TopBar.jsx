@@ -29,7 +29,7 @@ const TopBar = () => {
   const [showWikis, setShowWikis] = useState(false);
 
   const showWikiDropdown = () => {
-    setShowWikis(!showEditors);
+    setShowWikis(!showWikis);
   };
 
   const hideWikiDropdown = () => {
@@ -80,7 +80,7 @@ const TopBar = () => {
     <Navbar bg="light"
       collapseOnSelect={true}
       sticky="top"
-      className="shadow-sm p-3 mb-5 bg-white rounded"
+      className="shadow-sm p-3 bg-white rounded"
     >
       <Navbar.Brand href="/">
         {

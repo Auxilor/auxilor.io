@@ -3,9 +3,9 @@ import { Jumbotron } from 'react-bootstrap';
 import axios from 'axios';
 import BaseEditor from '../../../components/Editor/BaseEditor';
 
-const page = () => {
+const page = ({data}) => {
   return (
-    <BaseEditor/>
+    <BaseEditor data={data}/>
   );
 };
 
@@ -28,7 +28,6 @@ export async function getServerSideProps({ query }) {
         data: err.message,
       };
     });
-
   return {
     props: {
       data: response.data,
