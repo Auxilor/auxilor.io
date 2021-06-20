@@ -1,18 +1,11 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import axios from 'axios';
+import BaseEditor from '../../../components/Editor/BaseEditor';
 
-const page = ({ data }) => {
+const page = () => {
   return (
-    <div id="editor">
-      <Jumbotron>
-        <h1>Hello, there!</h1>
-        <p>
-          This page hasnt quite been developed quite yet, please come back later!
-        </p>
-      </Jumbotron>
-      <p>{JSON.stringify(data)}</p>
-    </div>
+    <BaseEditor/>
   );
 };
 
