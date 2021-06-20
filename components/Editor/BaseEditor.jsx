@@ -1,27 +1,30 @@
 import React from 'react';
-import style from '../../styles/BaseEditor/BaseEditor.module.css';
+// import style from '../../styles/BaseEditor/BaseEditor.module.scss';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const BaseEditor = ({data}) => {
   return (
-    <div className={style.container}>
-      <div className={style.editorMenu}> 
-        <div className={style.editorContainer}>
-          <div className={style.sets}>
-            <h2>
-              <button title="i need help">
-                <FontAwesomeIcon icon={['fas', 'caret-right']}/>
-              </button>
-              <span>
-                Sets
-              </span>
-              <button title="Add Set"></button>
-            </h2>
-          </div>
-          <div className={style.tiers}></div>
+    <div className="Base_Editor-container">
+      <div className="Base_Editor-EditorContainer"> 
+        <div className="Base_Editor-editorwrap">
+          <nav id="Base_Editor-editor-menu">
+            <div className="Base_Editor-sets">
+              <h2>
+                <button title="i need help">
+                  <FontAwesomeIcon icon='caret-right'/>
+                </button>
+                <span>
+                  Sets
+                </span>
+                <button title="Add Set"></button>
+              </h2>
+            </div>
+            <div >  </div>
+          </nav>
         </div>
       </div>
-      <div className={style.editor}>
+      <div>
 
       </div>
     </div>
