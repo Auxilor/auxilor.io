@@ -1,4 +1,4 @@
-const transformSetData = (data: Props) => {
+const transformSetData = (data: Data) => {
   data.sets.map(item => {
     // console.log(item.name);
     Object.keys(item).map(key => {
@@ -9,16 +9,28 @@ const transformSetData = (data: Props) => {
   })
 }
 
+const createNewSet = (setName: string) => {
+  const newSet = <setData>{};
+  newSet.name = setName
+  console.log(newSet)
+  return newSet;
+}
+
+const processData = (data: Data, name: string) => {
+  data.sets[1].potionEffects.map
+}
+
 export {
-  transformSetData
+  transformSetData,
+  createNewSet
 }
 
-type Props = {
-  sets: Array<set>,
-  tiers: Array<tier>
+type Data = {
+  sets: Array<setData>,
+  tiers: Array<tierData>
 }
 
-interface tier {
+interface tierData {
   name: String,
   display: String,
   requiresTiers: Array<String>,
@@ -36,7 +48,7 @@ interface tier {
   }
 }
 
-interface set {
+interface setData {
   name: string,
   conditions: Array<argument>,
   effects: Array<argument>,
