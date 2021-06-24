@@ -59,7 +59,7 @@ const BaseEditor = ({data}) => {
 
   const ToggleEditor = (EditorData, key = 'properties') => {
     setCacheEditorData(EditorData);
-    console.log('editor toggled');
+    // console.log('editor toggled');
     // console.log(getEditorView(data, editorData)['props']['children'].forEach(item => console.log(item['props']['children'])));
     // console.log(getEditorView(data, editorData));
     setEditorView(getEditorView(data, EditorData, key));
@@ -86,7 +86,7 @@ const BaseEditor = ({data}) => {
   const selectHandler = (selectedKey) => {
     ToggleEditor(CacheEditorData, selectedKey);
     setActiveEditorKey(selectedKey);
-    console.log(ActiveEditorKey);
+    // console.log(ActiveEditorKey);
   };
   function VCenteredModal(props) {
     return (

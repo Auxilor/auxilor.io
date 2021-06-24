@@ -1,12 +1,19 @@
 import React from 'react';
-import { Jumbotron } from 'react-bootstrap';
 import axios from 'axios';
-import BaseEditor from '../../../components/Editor/BaseEditor';
 
-const page = ({data}) => {
-  return (
-    <BaseEditor data={data}/>
-  );
+export default class Editor extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const { data } = this.props;
+
+    return (
+      <div id="editor">
+        <p>{JSON.stringify(data)}</p>
+      </div>
+    );
+  }
 };
 
 export async function getServerSideProps({ query }) {
@@ -34,5 +41,3 @@ export async function getServerSideProps({ query }) {
     }
   };
 }
-
-export default page;

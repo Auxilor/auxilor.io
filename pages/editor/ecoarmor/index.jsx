@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import BaseEditor from '../../../components/Editor/BaseEditor';
+
 
 export default class Editor extends React.Component {
   constructor(props) {
@@ -10,9 +12,7 @@ export default class Editor extends React.Component {
     const { data } = this.props;
 
     return (
-      <div id="editor">
-        <p>{ JSON.stringify(data) }</p>
-      </div>
+      <BaseEditor data={data} />
     );
   }
 }

@@ -37,7 +37,23 @@
                 margin-left:40px;
               }
               .item {
+                display: flex;
                 color: black;
+                .grid {
+                  display: flex;
+                  flex-wrap: wrap;
+                  justify-content: space-around;
+                  width: 256px;
+                  div {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex: 0 0 32%;
+                    height: 82px;
+                    margin-bottom: 5px;
+                    background-color: grey;
+                  }
+                }
               }
             }
           }

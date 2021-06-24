@@ -16,9 +16,6 @@ const createNewSet = (setName: string) => {
   return newSet;
 }
 
-const processData = (data: Data, name: string) => {
-  data.sets[1].potionEffects.map
-}
 
 export {
   transformSetData,
