@@ -2,25 +2,25 @@ const transformSetData = (data: Data) => {
   data.sets.map(item => {
     // console.log(item.name);
     Object.keys(item).map(key => {
-      if(key === "helmet" || key === "chestplate" || key === "elytra" || key === "leggings" || key === "boots"){
+      if (key === 'helmet' || key === 'chestplate' || key === 'elytra' || key === 'leggings' || key === 'boots') {
         // console.log(item[key])
       }
-    })
-  })
-}
+    });
+  });
+};
 
 const createNewSet = (setName: string) => {
   const newSet = <setData>{};
-  newSet.name = setName
-  console.log(newSet)
+  newSet.name = setName;
+  console.log(newSet);
   return newSet;
-}
+};
 
 
 export {
   transformSetData,
   createNewSet
-}
+};
 
 type Data = {
   sets: Array<setData>,
@@ -93,4 +93,4 @@ interface armorPiece {
 interface argument {
   id?: string,
   args?: number
-} 
+}
