@@ -1,19 +1,19 @@
 import React from 'react';
-import { Jumbotron } from 'react-bootstrap';
 import axios from 'axios';
 
-const page = ({ data }) => {
-  return (
-    <div id="editor">
-      <Jumbotron>
-        <h1>Hello, there!</h1>
-        <p>
-          This page hasnt quite been developed quite yet, please come back later!
-        </p>
-      </Jumbotron>
-      <p>{JSON.stringify(data)}</p>
-    </div>
-  );
+export default class Editor extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const { data } = this.props;
+
+    return (
+      <div id="editor">
+        <p>{JSON.stringify(data)}</p>
+      </div>
+    );
+  }
 };
 
 export async function getServerSideProps({ query }) {
@@ -35,12 +35,9 @@ export async function getServerSideProps({ query }) {
         data: err.message,
       };
     });
-
   return {
     props: {
       data: response.data,
     }
   };
 }
-
-export default page;
