@@ -56,6 +56,80 @@
                 }
               }
             }
+            .main-node-container {
+              .node-container {
+                .tab {
+                  margin-left: 40px;
+                }
+                div {
+                  color: black;
+                }
+                .property-node {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin: 0;
+                  padding: .5em 1em;
+                  
+                  span {
+                    color: black;
+                  }
+  
+                  button {
+                    background: transparent;
+                    border: none;
+                    opacity: .5;
+                    cursor: pointer;
+                    color: black;
+                    font-size: 1.5rem;
+                    padding: 0;
+                    margin-right: 50px;
+              
+                    svg {
+                      transition: transform .2s;
+                    }
+              
+                    &:hover {
+                      opacity: 1;
+                    }
+              
+                    &[disabled] {
+                      width: 1em;
+                    }
+                  }
+                }
+                .property {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: .5em 1em;
+
+                    
+                  button {
+                    background: transparent;
+                    border: none;
+                    opacity: .5;
+                    cursor: pointer;
+                    color: black;
+                    font-size: 1.5rem;
+                    padding: 0;
+                    margin-right: 54px;
+              
+                    svg {
+                      transition: transform .2s;
+                    }
+              
+                    &:hover {
+                      opacity: 1;
+                    }
+              
+                    &[disabled] {
+                      width: 1em;
+                    }
+                  }
+                }
+              }
+            }
           }
       }
     }

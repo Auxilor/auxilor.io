@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-// import style from '../../styles/BaseEditor/BaseEditor.module.scss';
-import { transformSetData, createNewSet } from '../../lib/BaseEditor.ts';
-import { getEditorView } from '../../lib/EditorView.tsx';
+import { transformSetData, createNewSet } from '../../api/BaseEditor.ts';
+// import { getEditorView } from '../../api/EditorView.tsx';
+import { getEditorView } from '../../api/EditorViewRewrite.tsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Modal, Button, Form, Nav } from 'react-bootstrap';
-import { useEffect } from 'react';
 
 const BaseEditor = ({data}) => {
   transformSetData(data);
@@ -19,11 +18,6 @@ const BaseEditor = ({data}) => {
   const [tierExpanded, setTierExpanded] = useState(false);
   const [tiersCreateModal, setTiersCreateModal] = useState(false);
   const [tierMetaExpanded, setTierMetaExpanded] = useState(false);
-
-  // useEffect(() => {
-  //   console.log(EditorData);
-  //   setEditorView(getEditorView(data, EditorData, ActiveEditorKey));
-  // }, [ActiveEditorKey, EditorData, data]);
 
 
   const updateProps = () => {
@@ -88,7 +82,7 @@ const BaseEditor = ({data}) => {
     setActiveEditorKey(selectedKey);
     // console.log(ActiveEditorKey);
   };
-  function VCenteredModal(props) {
+  function VCenteredSetModal(props) {
     return (
       <Modal
         {...props}
@@ -200,14 +194,12 @@ const BaseEditor = ({data}) => {
           </div>
         </div>
       </div>
-      <VCenteredModal show={setsCreateModal} onHide={() => setSetsCreateModal(false)}/>
+      <VCenteredSetModal show={setsCreateModal} onHide={() => setSetsCreateModal(false)}/>
     </div>
   );
 };
 
 
-const process = (data) => {
-  const setData = transformSetData(data);
-};
+BaseEditor.displayName = 'BaseEditor';
 
 export default BaseEditor;

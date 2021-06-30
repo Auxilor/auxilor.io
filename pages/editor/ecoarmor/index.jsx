@@ -9,11 +9,21 @@ export default class Editor extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
-
-    return (
-      <BaseEditor data={data} />
-    );
+    const { success, data } = this.props;
+    
+    if (success) {
+      return (
+        <BaseEditor data={data} />
+      );
+    } else {
+      return (
+        <div>
+          {
+            data
+          }
+        </div>
+      );
+    }
   }
 }
 
@@ -28,18 +38,20 @@ export async function getServerSideProps({ query }) {
   await axios.get(`https://hastebin.com/raw/${token}`)
     .then((res) => {
       response = {
+        success: true,
         data: res.data,
       };
     })
     .catch((err) => {
       response = {
+        success: false, 
         data: err.message,
       };
     });
-
+    
   return {
     props: {
-      data: response.data,
+      ...response
     }
   };
 }

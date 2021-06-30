@@ -16,10 +16,15 @@ const createNewSet = (setName: string) => {
   return newSet;
 };
 
+const createNewArgument = (test: String, value: number) => {
+  const newArgument = <argument>{id: test, args: value};
+  return newArgument;
+};
 
 export {
   transformSetData,
-  createNewSet
+  createNewSet,
+  createNewArgument
 };
 
 type Data = {
