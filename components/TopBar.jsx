@@ -80,7 +80,7 @@ const TopBar = () => {
     <Navbar bg="light"
       collapseOnSelect={true}
       sticky="top"
-      className="shadow-sm p-3 bg-white rounded"
+      className={`shadow-sm p-3 bg-white rounded ${style.nav}`}
     >
       <Navbar.Brand href="/">
         {

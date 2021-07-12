@@ -4,6 +4,7 @@ import { ucase } from './lang.tsx';
 import React, { MouseEventHandler, useState } from 'react';
 // @ts-expect-error
 import { createNewArgument } from './BaseEditor.ts';
+import crypto from 'crypto';
 
 const getEditorView = (data: Data, editorData, key) => {
   const {name, type} = editorData;
@@ -32,19 +33,17 @@ const rerender = {
 };
 
 function CreateSetPropertyNode({nodeName, set, children}: {nodeName:string, set:setData, children:Array<argument>}){
-  console.log('children');
-  console.log(children);
-  console.log('name');
-  console.log(nodeName);
   const [properties, setProperties] = useState(children);
-  console.log('set Children');
-  const removeArg = (name:String) => {
+  const removeArg = (name:string) => {
+    console.log(`removing item: ${name}`)
+    console.table({...properties})
     setProperties([...properties.filter(item => item.id !== name)]);
   };
 
   const createArg = (item:string) => {
-    setProperties([...properties, createNewArgument('test', 10)]);
-    console.log(set[item]);
+    console.log(`adding item: ${item}`)
+    console.table({...properties})
+    setProperties([...properties, createNewArgument('test'+crypto.randomBytes(2), 10)]);
   };
   // return (
   //   <div></div>
@@ -130,7 +129,7 @@ const newMethod = (set: setData, EditorKey: String) => {
             isArgumentNotString(set[item])
               // eslint-disable-next-line react/no-children-prop
               ? <CreateSetPropertyNode nodeName={item} set={set} children={set[item]} />
-              : <div><span color="black">{item}</span></div>
+              : <div className="node-container"><div className="property-node"><span style={{"color": "black"}}>{item}</span></div></div>
           ))
         }
       </div>

@@ -27,9 +27,9 @@ export default function App({
         <title>Auxilor</title>
       </Head>
       <TopBar/>
-      <main className="beans">
+      <div className="beans">
         <Component {...pageProps} />
-      </main>
+      </div>
     </>
   );
 }
