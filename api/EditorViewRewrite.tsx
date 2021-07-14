@@ -5,6 +5,7 @@ import React, { MouseEventHandler, useState } from 'react';
 // @ts-expect-error
 import { createNewArgument } from './BaseEditor.ts';
 import crypto from 'crypto';
+import { Button, Form, Modal } from 'react-bootstrap';
 
 const getEditorView = (data: Data, editorData, key) => {
   const {name, type} = editorData;
@@ -32,7 +33,9 @@ const rerender = {
   }
 };
 
-function CreateSetPropertyNode({nodeName, set, children}: {nodeName:string, set:setData, children:Array<argument>}){
+function CreateSetArgumentPropertyNode({nodeName, set, children}: {nodeName:string, set:setData, children:Array<argument>}){
+  const [returnValue, setReturnValue] = useState();
+  const [showModal, setModalShow] = useState(false);
   const [properties, setProperties] = useState(children);
   const removeArg = (name:string) => {
     console.log(`removing item: ${name}`)
@@ -41,17 +44,15 @@ function CreateSetPropertyNode({nodeName, set, children}: {nodeName:string, set:
   };
 
   const createArg = (item:string) => {
-    console.log(`adding item: ${item}`)
-    console.table({...properties})
-    setProperties([...properties, createNewArgument('test'+crypto.randomBytes(2), 10)]);
+    setModalShow(true)
+    setProperties([...properties, createNewArgument('test'+crypto.randomBytes(2), 10)])
+
   };
-  // return (
-  //   <div></div>
-  // );
   return (
     <div className='node-container'>
+      <PropertyModal show={showModal} onHide={() => setModalShow(false)}/>
       <div className='property-node'>
-        <span>{nodeName}</span>
+        <span>{nodeName}:</span>
         <button title='Add' onClick={() => createArg(nodeName)}>
           <FontAwesomeIcon icon="plus-circle"/>
         </button>
@@ -80,7 +81,63 @@ function CreateSetPropertyNode({nodeName, set, children}: {nodeName:string, set:
       }
     </div>
   );
+
+  //TODO Make auto complete + make it look better
+  function PropertyModal(props) {
+    return (
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Add a property.
+          </Modal.Title>
+        </Modal.Header>
+        {/* <Modal.Body>
+          <h4>Set name.</h4>
+          <Form onSubmit={formHandler}>
+            <Form.Group controlId="formSetName">
+              <Form.Label>Enter a Set Name.</Form.Label>
+              <Form.Control type="text" label="setName" name="setName" placeholder="Your set name (eg Reaper)"/>
+            </Form.Group>
+          </Form>
+        </Modal.Body> */}
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
 } 
+
+function CreateSetNonArgumentPropertyNode({nodeName, set, children}:  {nodeName:string, set:setData, children:Array<unknown>}) {
+  return (
+    <div className='node-container'>
+      <div className='property-node'>
+        <span>{Array.isArray(children) ? `${nodeName}:` : `${nodeName}: ${children}`}</span>
+      </div>
+      {
+        Array.isArray(children)
+        ? children.map(item => (
+          <div key={`${item}`} className='tab property'>
+            <div>
+              {
+                item
+              }
+            </div>
+          </div>
+          
+        ))
+        : null
+      }
+    </div>
+  )
+}
+
+
 
 // const createSetPropertyNode = (nodeName: String, OnClickEvent: MouseEventHandler, children: Array<argument>) => {
 //   return (
@@ -128,8 +185,18 @@ const newMethod = (set: setData, EditorKey: String) => {
           setObject.map(item => (
             isArgumentNotString(set[item])
               // eslint-disable-next-line react/no-children-prop
-              ? <CreateSetPropertyNode nodeName={item} set={set} children={set[item]} />
-              : <div className="node-container"><div className="property-node"><span style={{"color": "black"}}>{item}</span></div></div>
+              ? <CreateSetArgumentPropertyNode nodeName={item} set={set} children={set[item]} />
+              : <CreateSetNonArgumentPropertyNode nodeName={item} set={set} children={set[item]} />
+              
+              // : <div className="node-container">
+              //     <div className="property-node">
+              //       <span style={{"color": "black"}}>
+              //         {
+              //           item
+              //         }
+              //       </span>
+              //     </div>
+              //   </div>
           ))
         }
       </div>

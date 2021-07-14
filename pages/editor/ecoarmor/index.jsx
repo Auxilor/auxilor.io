@@ -37,6 +37,12 @@ export async function getServerSideProps({ query }) {
 
   await axios.get(`https://hastebin.com/raw/${token}`)
     .then((res) => {
+      try {
+        console.log("URL ENCODED")
+        res.data = JSON.parse(decodeURIComponent(res.data).replaceAll("+"," "));
+      } catch (_) {
+        console.log("NOT URL ENCODED")
+      }
       response = {
         success: true,
         data: res.data,
