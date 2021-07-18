@@ -1,19 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // @ts-expect-error
 import { ucase } from './lang.tsx';
-import React, { MouseEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 // @ts-expect-error
 import { createNewArgument } from './BaseEditor.ts';
 import crypto from 'crypto';
 import { Button, Form, Modal } from 'react-bootstrap';
+import { Hint } from 'react-autocomplete-hint';
 
 const getEditorView = (data: Data, editorData, key) => {
   const {name, type} = editorData;
+  const { meta } = data;
   switch (name) {
   case 'sets':
     const sets = data.sets;
     const set = sets.filter(item => item.name === type)[0];
-    return newMethod(set, key);
+    return newMethod(set, key, meta);
     // return ABigFuckoffTemplate(set, key);
   case 'tiers':
     const tiers = data.tiers;
@@ -33,7 +35,8 @@ const rerender = {
   }
 };
 
-function CreateSetArgumentPropertyNode({nodeName, set, children}: {nodeName:string, set:setData, children:Array<argument>}){
+function CreateSetArgumentPropertyNode({nodeName, set, children, meta}: {nodeName:string, set:setData, children:Array<argument>, meta:metaData}){
+  console.log(meta)
   const [returnValue, setReturnValue] = useState();
   const [showModal, setModalShow] = useState(false);
   const [properties, setProperties] = useState(children);
@@ -45,12 +48,18 @@ function CreateSetArgumentPropertyNode({nodeName, set, children}: {nodeName:stri
 
   const createArg = (item:string) => {
     setModalShow(true)
-    setProperties([...properties, createNewArgument('test'+crypto.randomBytes(2), 10)])
-
   };
+
+  const formHandler = (e) => {
+    e.preventDefault();
+    console.log("benis")
+    setProperties([...properties, createNewArgument('test'+crypto.randomBytes(2), 10)]);
+    setModalShow(false);
+  };
+
   return (
     <div className='node-container'>
-      <PropertyModal show={showModal} onHide={() => setModalShow(false)}/>
+      <PropertyModal show={showModal} onHide={() => setModalShow(false)} type="enchants"/>
       <div className='property-node'>
         <span>{nodeName}:</span>
         <button title='Add' onClick={() => createArg(nodeName)}>
@@ -84,6 +93,7 @@ function CreateSetArgumentPropertyNode({nodeName, set, children}: {nodeName:stri
 
   //TODO Make auto complete + make it look better
   function PropertyModal(props) {
+    const type = props.type;
     return (
       <Modal
         {...props}
@@ -96,15 +106,18 @@ function CreateSetArgumentPropertyNode({nodeName, set, children}: {nodeName:stri
             Add a property.
           </Modal.Title>
         </Modal.Header>
-        {/* <Modal.Body>
+        <Modal.Body>
           <h4>Set name.</h4>
           <Form onSubmit={formHandler}>
             <Form.Group controlId="formSetName">
-              <Form.Label>Enter a Set Name.</Form.Label>
-              <Form.Control type="text" label="setName" name="setName" placeholder="Your set name (eg Reaper)"/>
+              <Form.Label>Enter a Property</Form.Label>
+              <Hint options={meta[type]} allowTabFill>
+                {/* <input label="property" id="formSetName" className="form-control" /> */}
+                <Form.Control type="text" label="property" name="property" placeholder="" as="input"/>
+              </Hint>
             </Form.Group>
           </Form>
-        </Modal.Body> */}
+        </Modal.Body>
         <Modal.Footer>
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
@@ -172,7 +185,7 @@ function CreateSetNonArgumentPropertyNode({nodeName, set, children}:  {nodeName:
 //   );
 // };
 
-const newMethod = (set: setData, EditorKey: String) => {
+const newMethod = (set: setData, EditorKey: String, meta: metaData) => {
   let setObject = Object.keys(set);
   EditorKey.toLowerCase() === 'properties'
     ? setObject = setObject.filter(item => !['helmet', 'chestplate', 'elytra', 'leggings', 'boots', 'name'].includes(item))
@@ -185,7 +198,7 @@ const newMethod = (set: setData, EditorKey: String) => {
           setObject.map(item => (
             isArgumentNotString(set[item])
               // eslint-disable-next-line react/no-children-prop
-              ? <CreateSetArgumentPropertyNode nodeName={item} set={set} children={set[item]} />
+              ? <CreateSetArgumentPropertyNode nodeName={item} set={set} children={set[item]} meta={meta}/>
               : <CreateSetNonArgumentPropertyNode nodeName={item} set={set} children={set[item]} />
               
               // : <div className="node-container">
@@ -212,11 +225,6 @@ function isArgumentNotString(object:any): object is Array<unknown> {
   if(typeof object[0] === 'string') return false;
   return typeof object[0] === 'object' ? object[0].args !== undefined : object[0] === undefined;
 }
-
-const getMeta = (data: Data) => {
-  const {enchants, potionEffects, effects, conditions} = data.meta;
-
-};
 
 export {
   getEditorView,
@@ -335,79 +343,3 @@ enum modifiers {
   '&n' = 'underline',
   '&m' = 'strike',
 }
-
-enum potionsEnum {
-  'ABSORPTION' = 'Absorption: Level {0}.',
-  'BAD_OMEN' = 'Bad Omen: Level {0}.',
-  'BLINDNESS' = 'Blindness: Level {0}.',
-  'CONDUIT_POWER' = 'Conduit Power: Level {0}.',
-  'CONFUSION' = 'Nausea: Level {0}.',
-  'DAMAGE_RESISANCE' = 'Resistance: Level {0}.',
-  'DOLPHINS_GRACE' = 'Dolphins Grace: Level {0}.',
-  'FAST_DIGGING' = 'Haste: Level {0}.',
-  'FIRE_RESISTANCE' = 'Fire Resistance: Level {0}.',
-  'GLOWING' = 'Glowing: Level {0}.',
-  'HEALTH_BOOST' = 'Health Boost: Level {0}.',
-  'HERO_OF_THE_VILLAGE' = 'Hero Of the Village: Level {0}.',
-  'HUNGER' = 'Hunger: Level {0}.',
-  'INCREASE_DAMAGE' = 'Strength: Level {0}.',
-  'INVISIBILITY' = 'Invisibility: Level {0}.',
-  'JUMP' = 'Jump Boost: Level {0}.',
-  'LEVITATION' = 'Levitation: Level {0}.',
-  'LUCK' = 'Luck: Level {0}.',
-  'NIGHT_VISION' = 'Night Vision: Level {0}.',
-  'POISON' = 'Poison: Level {0}.',
-  'REGENERATION' = 'Regeneration: Level {0}.',
-  'SATURATION' = 'Saturation: Level {0}.',
-  'SLOW' = 'Slowness: Level {0}.',
-  'SLOW_DIGGING' = 'Mining Fatigue: Level {0}.',
-  'SLOW_FALLING' = 'Slow Falling: Level {0}.',
-  'SPEED' = 'Swiftness: Level {0}.',
-  'UNLUCK' = 'Bad Luck: Level {0}.',
-  'WATER_BREATHING' = 'Water Breathing: Level {0}.',
-  'WEAKNESS' = 'Weakness: Level {0}.',
-  'WITHER' = 'Wither: Level {0}.'
-}
-
-enum conditionsEnum {
-  'above-health-percent' = 'Above Health Percent',
-  'below-health-percent' = 'Below Health Percent',
-  'above-hunger-percent' = 'Above Hunger Percent',
-  'below-hunger-percent' = 'Below Hunger Percent',
-  'above-xp-level' = 'Above XP level',
-  'below-xp-level' = 'Below XP level',
-  'above-y-level' = 'Above Y level',
-  'below-y-level' = 'Below Y level',
-  'has-permission' = 'Has Permission',
-  'in-biome' = 'In Biome',
-  'in-water' = 'In Water',
-  'in-world' = 'In World'
-}
-
-enum effectsEnum { 
-  'attack-speed-multiplier' = 'Atack Speed: {0} Multiplier.',
-  'bonus-hearts' = 'Bonus Hearts: {0} Hearts.',
-  'boss-damage-multiplier' = 'Boss Damage: {0} Multiplier.',
-  'bow-damage-multiplier' = 'Bow Damage: {0} Multiplier.',
-  'damage-multiplier' = 'Damage: {0} Multiplier.',
-  'damage-taken-multiplier' = 'Damage Taken: {0} Multiplier.',
-  'durability-multiplier' = 'Durability: {0} Multiplier.',
-  'evade-chance' = 'Evade: {0}% Chance.',
-  'experience-multiplier' = 'Experience: {0} Multiplier.',
-  'fall-damage-multiplier' = 'Fall Damage: {0} Multiplier.',
-  'flight' = 'Flight: {0}.',
-  'hunger-loss-multiplier' = 'Hunger Loss: {0} Multiplier.',
-  'melee-damage-multiplier' = 'Melee Damage: {0} Multiplier.',
-  'regeneration-multiplier' = 'Regeration: {0} Multiplier.',
-  'speed-multiplier' = 'Speed: {0} Multiplier.',
-  'trident-damage-multiplier' = 'Trident Damage: {0} Multiplier.',
-  'warp-chance' = 'Warp: {0}% Chance.'
-}
-
-const pain = {
-  potionEffects: potionsEnum,
-  advancedPotionEffects: potionsEnum,
-  conditions: conditionsEnum,
-  effects: effectsEnum,
-  advancedEffects: effectsEnum
-}; 
