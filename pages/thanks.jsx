@@ -17,7 +17,7 @@ export default function Home() {
         <div className="main-content">
           <i className="fa fa-check main-content__checkmark" id="checkmark"></i>
           <p className="main-content__body" data-lead-id="main-content-body">
-          Thank you for your payment. Your transaction has been completed and we've emailed you a
+          Thank you for your payment. Your transaction has been completed and we have emailed you a
           receipt for your purchase. Log in to your PayPal account to view transaction details.
 
             Come check out our sponsors!
